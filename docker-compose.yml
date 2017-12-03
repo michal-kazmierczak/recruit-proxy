@@ -11,4 +11,12 @@ services:
       - RABBIT_HOST=rabbitmq
     depends_on:
       - rabbitmq
+  ruby-http-proxy:
+    build: ./ruby-http-proxy
+    ports:
+      - 9292:9292
+    environment:
+      - RABBIT_HOST=rabbitmq
+    depends_on:
+      - rabbitmq
 
