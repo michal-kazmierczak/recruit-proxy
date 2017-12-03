@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+
+gem 'bunny'
+gem 'grape'
+gem 'grape_logging'
+gem 'pry'
+gem 'puma'
+gem 'rack'
