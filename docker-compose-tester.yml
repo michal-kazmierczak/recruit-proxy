@@ -1,0 +1,28 @@
+version: "2"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.6.9-management
+    ports:
+      - 15672:5672
+  ruby-invoices:
+    build: ./ruby-invoices
+    environment:
+      - RABBIT_HOST=rabbitmq
+    depends_on:
+      - rabbitmq
+  ruby-http-proxy:
+    build: ./ruby-http-proxy
+    ports:
+      - 9292:9292
+    environment:
+      - RABBIT_HOST=rabbitmq
+    depends_on:
+      - rabbitmq
+  end-to-end-tester:
+    build: ./end-to-end-tester
+    depends_on:
+      - rabbitmq
+      - ruby-http-proxy
+      - ruby-invoices
+
